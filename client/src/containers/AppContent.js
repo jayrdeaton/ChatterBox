@@ -8,17 +8,15 @@ import { config } from '../refs';
 class AppContent extends Component {
   render() {
     const { classes } = this.props;
-    const { open } = this.props.drawer
+    const { open } = this.props.drawer;
     return (
       <main className={classNames(classes.content, !open && classes.contentShift)}>
-        <div className={classes.appBarSpacer} />
         {this.props.children}
       </main>
     );
   };
 };
 const styles = theme => ({
-  appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,

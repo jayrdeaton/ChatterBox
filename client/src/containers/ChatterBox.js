@@ -26,12 +26,19 @@ class ChatterBox extends Component {
     const { classes } = this.props;
     const { message, voice } = this.state;
     return (
-      <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+      <div className={classes.root}>
+        <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+      </div>
     );
   };
 };
 const styles = theme => ({
-
+  root: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column-reverse'
+  }
 });
 
 ChatterBox.propTypes = {

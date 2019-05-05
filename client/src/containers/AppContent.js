@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-
-const drawerWidth = 240;
+import { config } from '../refs';
 
 class AppContent extends Component {
   render() {
@@ -27,7 +26,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginRight: drawerWidth,
+    marginRight: config.drawer_width,
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

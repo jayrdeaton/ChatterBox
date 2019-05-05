@@ -1,8 +1,9 @@
 import React from 'react';
+import { SayForm } from '../containers';
 
 let Home = (props) => {
   return (
-    <div>home</div>
+    <SayForm />
   );
 };
 

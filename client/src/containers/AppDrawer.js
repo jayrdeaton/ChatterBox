@@ -6,11 +6,10 @@ import { connect } from 'react-redux';
 import { Drawer, Divider, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { ChevronLeft } from '@material-ui/icons';
+import { config } from '../refs';
 
 import { drawer_actions } from '../actions';
 const { closeDrawer, openDrawer } = drawer_actions;
-
-const drawerWidth = 240;
 
 class AppDrawer extends Component {
   render() {
@@ -47,7 +46,7 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: config.drawer_width,
   },
 });
 const mapStateToProps = ({ drawer }) => {

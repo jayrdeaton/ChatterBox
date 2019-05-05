@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { AppContent, AppHeader } from '../containers';
 
+import Home from './Home';
 import NotFound from './NotFound';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
         <AppContent>
           <Switch>
             {/*<Route path='/' exact component={Test}/>*/}
+            <Route path='/' component={Home}/>
             <Route component={NotFound} />
           </Switch>
         </AppContent>

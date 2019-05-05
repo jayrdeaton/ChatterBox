@@ -1,7 +1,7 @@
 {
   "name": "chatterbox-server",
   "version": "0.0.5",
-  "description": "api and app for say",
+  "description": "make your device a chatterbox",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",

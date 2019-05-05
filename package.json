@@ -8,7 +8,6 @@
     "dev": "DEBUG=media-test:* nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "postinstall": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

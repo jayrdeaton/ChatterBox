@@ -7,7 +7,8 @@
     "start": "node ./bin/www",
     "dev": "DEBUG=media-test:* nodemon ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "postinstall": "cd client && npm install && npm run build"
   },
   "bin": {
     "chatterbox": "./ChatterBox"

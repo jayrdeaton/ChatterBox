@@ -24,7 +24,7 @@ class VoiceSelect extends Component {
           }}
         >
           {voices.english.map((voice, index) =>
-            <MenuItem key='index' value={voice}>{voice}</MenuItem>
+            <MenuItem key={index} value={voice}>{voice}</MenuItem>
           )}
         </Select>
       </FormControl>

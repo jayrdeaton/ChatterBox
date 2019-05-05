@@ -11,7 +11,6 @@ class SayForm extends Component {
     this.state = { message: '', voice: 'Alex' };
     this.messageInput = createRef();
   };
-
   componentWillReceiveProps(props) {
     const { message, voice } = props;
     if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
@@ -25,6 +24,7 @@ class SayForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { message, voice } = this.state;
+    document.getElementById('message').select();
     this.props.onSubmit({ message, voice });
   };
   render() {

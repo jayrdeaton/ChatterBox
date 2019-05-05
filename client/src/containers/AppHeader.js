@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography } from '@material-ui/core/AppBar';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import ThemeTypeButton from './ThemeTypeButton'
 import { config } from '../refs';
 import { drawer_actions } from '../actions';

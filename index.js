@@ -20,7 +20,6 @@ app.use(express.static(join(__dirname, 'client', 'build')));
 app.use('/api', api_router);
 // catchAll / send file
 app.get('*', (req, res) => {
-  console.log('hereiam')
   res.sendFile(join(__dirname, 'client', 'build', 'index.html'));
 });
 // error handler

@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
-import { fetch_middleware } from './middlewares';
+// import { fetch_middleware } from './middlewares';
 import App from './routes';
 import reducers from './reducers';
 import { ThemeProvider } from './providers';
@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import './style/index.css';
 
 const createStoreWithMiddleware = applyMiddleware(
-  promise, fetch_middleware
+  promise
 )(createStore);
 
 ReactDOM.render(

@@ -38,8 +38,8 @@ const styles = theme => ({
 });
 VoiceSelect.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  selection: PropTypes.string
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string
 };
 VoiceSelect = withStyles(styles)(VoiceSelect);
 export default VoiceSelect;

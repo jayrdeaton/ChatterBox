@@ -48,7 +48,9 @@ class ChatterBox extends Component {
     const { history, message, voice } = this.state;
     return (
       <div className={classes.root}>
-        <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+        <div className={classes.formWrapper}>
+          <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+        </div>
         <div className={classes.history}>
           <div className={classes.appBarSpacer} />
           {history.map((said, index) =>
@@ -86,9 +88,12 @@ const styles = theme => ({
     flexDirection: 'column-reverse',
     overflow: 'scroll'
   },
+  formWrapper: {
+    margin: theme.spacing.unit * 2
+  },
   history: {
     flexDirection: 'column-reverse',
-    marginBottom: theme.spacing.unit * 2
+    margin: theme.spacing.unit * 2
   },
   said: {
     margin: theme.spacing.unit,

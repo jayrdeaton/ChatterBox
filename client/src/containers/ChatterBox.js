@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Fab, IconButton, Paper, TextField, Typography } from '@material-ui/core';
+import { IconButton, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseButton, Redo as RedoIcon } from '@material-ui/icons';
 import uuid from 'uuid';
-import { SayForm, VoiceSelect } from '../components';
+import { SayForm } from '../components';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 

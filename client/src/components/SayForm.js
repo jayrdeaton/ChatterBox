@@ -1,11 +1,9 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Fab, Grid, TextField } from '@material-ui/core';
+import { Fab, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Send as SendIcon } from '@material-ui/icons';
 import { VoiceSelect } from '../components';
-
-const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 
 class SayForm extends Component {
   constructor(props) {

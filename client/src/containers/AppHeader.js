@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import { ShoppingCart as CartIcon } from '@material-ui/icons';
+import { AppBar, Toolbar, Typography } from '@material-ui/core/AppBar';
 import ThemeTypeButton from './ThemeTypeButton'
 import { config } from '../refs';
 import { drawer_actions } from '../actions';

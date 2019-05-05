@@ -2,7 +2,7 @@ import App from './App';
 import AppContent from './AppContent';
 import AppDrawer from './AppDrawer';
 import AppHeader from './AppHeader';
-import SayForm from './SayForm';
+import ChatterBox from './ChatterBox';
 import ThemeTypeButton from './ThemeTypeButton';
 
 export {
@@ -10,6 +10,6 @@ export {
   AppContent,
   AppDrawer,
   AppHeader,
-  SayForm,
+  ChatterBox,
   ThemeTypeButton,
 };

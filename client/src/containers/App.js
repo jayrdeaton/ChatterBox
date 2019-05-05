@@ -4,14 +4,14 @@ import { Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { AppContent, AppHeader } from '../containers';
 
-import SayForm from './SayForm';
+import ChatterBox from './ChatterBox';
 
 let App = ({ classes }) => {
   return (
     <div className={classes.root}>
       <AppHeader />
       <AppContent>
-        <SayForm />
+        <ChatterBox />
       </AppContent>
     </div>
   );

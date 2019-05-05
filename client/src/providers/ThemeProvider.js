@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { CssBaseline } from '@material-ui/core';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -46,5 +45,4 @@ Theme.propTypes = {
   theme: PropTypes.object.isRequired
 };
 Theme = connect(mapStateToProps)(Theme);
-Theme = withRouter(Theme);
 export default Theme;

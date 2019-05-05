@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -56,6 +55,5 @@ AppDrawer.propTypes = {
   drawer: PropTypes.object.isRequired
 };
 AppDrawer = connect(mapStateToProps, { closeDrawer, openDrawer })(AppDrawer);
-AppDrawer = withRouter(AppDrawer);
 AppDrawer = withStyles(styles)(AppDrawer);
 export default AppDrawer

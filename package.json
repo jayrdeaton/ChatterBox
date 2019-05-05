@@ -1,8 +1,8 @@
 {
-  "name": "saypi",
+  "name": "chatterbox",
   "version": "0.0.0",
   "private": true,
-  "description": "an api for say",
+  "description": "api and app for say",
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/www",

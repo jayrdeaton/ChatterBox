@@ -4,8 +4,8 @@ import { Button, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { VoiceSelect } from '../components';
 
-const DOMAIN = process.env.REACT_APP_SAYPI_DOMAIN || '';
-
+// const DOMAIN = process.env.REACT_APP_SAYPI_DOMAIN || '';
+const DOMAIN = '';
 class SayForm extends Component {
   state = { message: '', voice: 'Alex' };
   handleMessageChange = (e) => {

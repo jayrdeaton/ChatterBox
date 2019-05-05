@@ -27,7 +27,7 @@ class AppHeader extends Component {
             noWrap
             className={classes.title}
           >
-            SayBot
+            ChatterBox
           </Typography>
           <ThemeTypeButton />
         </Toolbar>

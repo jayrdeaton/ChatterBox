@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fab, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,11 +6,7 @@ import { Send as SendIcon } from '@material-ui/icons';
 import { VoiceSelect } from '../components';
 
 class SayForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { message: '', voice: 'Alex' };
-    this.messageInput = createRef();
-  };
+  state = { message: '', voice: 'Alex' };
   componentWillReceiveProps(props) {
     const { message, voice } = props;
     if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
@@ -47,7 +43,6 @@ class SayForm extends Component {
             value={message}
             onChange={this.handleMessageChange}
             variant='outlined'
-            ref={this.messageInput}
           />
           <div className={classes.voice}>
             <VoiceSelect value={voice} onChange={this.handleVoiceChange} />

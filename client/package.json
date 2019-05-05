@@ -16,10 +16,10 @@
   },
   "scripts": {
     "start": "serve -s build",
-    "build": "sh -ac '. ../.env; react-scripts build'",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "sh -ac '. ../.env; react-scripts start'",
+    "dev": "PORT=5000 REACT_APP_DOMAIN=http://localhost:3000 react-scripts start",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {

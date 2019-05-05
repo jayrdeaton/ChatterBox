@@ -18,14 +18,14 @@ class VoiceSelect extends Component {
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor='voice-select'>Voice</InputLabel>
         <Select
-          value={this.props.selection ? this.props.selection : ''}
+          value={this.props.value ? this.props.value : ''}
           onChange={this.props.handleChange}
           inputProps={{
             name: 'voice',
             id: 'voice-select'
           }}
         >
-          {voices.english.map((index, voice) => 
+          {voices.english.map((index, voice) =>
             <MenuItem key='index' value={voice}>{Voice}</MenuItem>
           )}
         </Select>

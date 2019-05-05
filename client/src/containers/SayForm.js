@@ -7,7 +7,7 @@ import { VoiceSelect } from '../components';
 const DOMAIN = process.env.REACT_APP_SAYPI_DOMAIN || '';
 
 class SayForm extends Component {
-  state = { message: '' };
+  state = { message: '', voice: 'Alex' };
   handleMessageChange = (e) => {
     this.setState({ message: e.target.value });
   };

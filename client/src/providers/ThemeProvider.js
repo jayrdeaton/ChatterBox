@@ -6,8 +6,9 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 class Theme extends Component {
   render() {
+    const { type } = this.props.theme;
     const theme = createMuiTheme({
-      // palette: {
+      palette: {
       //   primary: {
       //     // light: '#a7b934',
       //     // main: '#343a40',
@@ -24,8 +25,8 @@ class Theme extends Component {
       //     // dark: '#ba000d',
       //     // contrastText: '#000',
       //   },
-      //   type
-      // },
+        type
+      },
       typography: {
         useNextVariants: true,
       }

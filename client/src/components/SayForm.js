@@ -26,8 +26,6 @@ class SayForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.messageInput.current.select();
-    console.log(this.messageInput.current);
     const { message, voice } = this.state;
     this.props.onSubmit({ message, voice });
   };
@@ -57,7 +55,6 @@ class SayForm extends Component {
             <VoiceSelect value={voice} onChange={this.handleVoiceChange} />
           </div>
           <Fab
-            variant='contained'
             color='primary'
             type='submit'
             className={classes.submit}

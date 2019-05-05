@@ -9,6 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "bin": {
+    "chatterbox": "./ChatterBox"
+  },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",

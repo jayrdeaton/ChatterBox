@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +9,11 @@ import { SayForm } from '../components';
 const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 
 class ChatterBox extends Component {
-  state = { message: '', voice: 'Alex', history: [] };
+  constructor(props) {
+    super(props);
+    this.state = { message: '', voice: 'Alex', history: [] };
+    this.sayForm = createRef();
+  };
   handleSubmit = async ({ message, voice }) => {
     const { history } = this.state;
     history.push({
@@ -40,6 +44,7 @@ class ChatterBox extends Component {
     this.setState({ history });
   };
   handleRedo = ({ message, voice }) => {
+    this.sayForm.current.scrollIntoView({ behavior: 'smooth' })
     this.handleSubmit({ message, voice });
   };
 
@@ -48,7 +53,7 @@ class ChatterBox extends Component {
     const { history, message, voice } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.formWrapper}>
+        <div className={classes.formWrapper} ref={this.sayForm}>
           <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
         </div>
         <div className={classes.history}>

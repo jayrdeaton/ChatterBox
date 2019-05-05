@@ -11,7 +11,7 @@
     "postinstall": "cd client && npm install && npm run build"
   },
   "bin": {
-    "chatterbox": "./ChatterBox"
+    "chatterbox": "./bin/cli"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

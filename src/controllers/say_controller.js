@@ -1,6 +1,7 @@
 const express = require('express'),
   router = express.Router(),
-  say = require('say');
+  say = require('say'),
+  { cyan } = require('cosmetic');
 
 router.route('/')
   .post(async (req, res, next) => {
@@ -9,6 +10,7 @@ router.route('/')
     try {
       say.stop();
       say.speak(message, voice, speed);
+      console.log(`${new Date().toLocaleString()} | ${cyan(voice)} said: ${message}`);
       res.status(200).send();
     } catch(err) {
       res.status(500).send(err);

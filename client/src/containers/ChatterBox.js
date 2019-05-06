@@ -5,16 +5,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseButton, Redo as RedoIcon } from '@material-ui/icons';
 import uuid from 'uuid';
 import { SayForm } from '../components';
+import { voices } from '../refs';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 
 class ChatterBox extends Component {
   constructor(props) {
     super(props);
-    this.state = { message: '', voice: 'Alex', history: [] };
+    this.state = {  history: [], language: 'English', message: '', voice: 0 };
     this.sayForm = createRef();
   };
-  handleSubmit = async ({ message, name, speed, voice }) => {
+  handleSubmit = async ({ language, message, name, speed, voice }) => {
+    if (!message) return;
     const { history } = this.state;
     history.push({
       id: uuid.v1(),
@@ -24,7 +26,8 @@ class ChatterBox extends Component {
       voice,
       timestamp: new Date()
     });
-    this.setState({ message, voice, history });
+    this.setState({ language, message, voice, history });
+    voice = voices[language][voice];
     try {
       await fetch(`${DOMAIN}/api/say`, {
         headers: {
@@ -52,7 +55,7 @@ class ChatterBox extends Component {
 
   render() {
     const { classes } = this.props;
-    const { history, message, voice } = this.state;
+    const { history, language, message, voice } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.formWrapper} ref={this.sayForm}>
@@ -64,7 +67,7 @@ class ChatterBox extends Component {
             <Paper key={index} className={classes.said}>
               <div className={classes.row}>
                 <Typography color='textSecondary' variant='caption'>
-                  {said.voice} Said:
+                  {voices[language][said.voice]} Said:
                 </Typography>
                 <Typography color='textSecondary' variant='caption' className={classes.timestamp}>
                   {said.timestamp.toLocaleString()}

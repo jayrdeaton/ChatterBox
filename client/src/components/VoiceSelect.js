@@ -11,21 +11,21 @@ import { voices } from '../refs';
 
 class VoiceSelect extends Component {
   render() {
-    const { classes, language } = this.props;
+    const { classes, language, onChange, value } = this.props;
     const group = voices[language] || [];
     return (
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor='voice-select'>Voice</InputLabel>
         <Select
-          value={this.props.value ? this.props.value : ''}
-          onChange={this.props.onChange}
+          value={value ? value : 0}
+          onChange={onChange}
           inputProps={{
             name: 'voice',
             id: 'voice-select'
           }}
         >
           {group.map((voice, index) =>
-            <MenuItem key={index} value={voice}>{voice}</MenuItem>
+            <MenuItem key={index} value={index}>{voice}</MenuItem>
           )}
         </Select>
       </FormControl>
@@ -40,7 +40,7 @@ const styles = theme => ({
 VoiceSelect.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string
+  value: PropTypes.number
 };
 VoiceSelect = withStyles(styles)(VoiceSelect);
 export default VoiceSelect;

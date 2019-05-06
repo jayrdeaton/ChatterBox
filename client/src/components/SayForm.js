@@ -10,7 +10,7 @@ import {
 import SettingsDialog from './SettingsDialog';
 
 class SayForm extends Component {
-  state = { language: 'English', message: '', name: '', settings_open: false, speed: 1, voice: 'Alex' };
+  state = { language: 'English', message: '', name: '', settings_open: false, speed: 1, voice: 0 };
   componentWillReceiveProps(props) {
     const { message, voice } = props;
     if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
@@ -31,44 +31,47 @@ class SayForm extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const { message, name, speed, voice } = this.state;
+    const { language, message, name, speed, voice } = this.state;
     document.getElementById('message').select();
-    this.props.onSubmit({ message, name, speed, voice });
+    this.props.onSubmit({ language, message, name, speed, voice });
   };
   render() {
     const { classes } = this.props;
     const { language, message, name, speed, voice } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Grid
-          container
-          direction='row'
-          justify='space-between'
-          alignItems='center'
-          spacing={16}
-        >
-          <TextField
-            id='message'
-            label='Message'
-            autoFocus
-            className={classes.message}
-            value={message}
-            onChange={this.handleMessageChange}
-            variant='outlined'
-          />
-        <IconButton onClick={this.handleSettingsClick}>
-          <SettingsIcon />
-        </IconButton>
-          <Fab
-            color='primary'
-            type='submit'
-            className={classes.submit}
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <Grid
+            container
+            direction='row'
+            justify='space-between'
+            alignItems='center'
+            spacing={16}
           >
-            <SendIcon />
-          </Fab>
-        </Grid>
+            <TextField
+              id='message'
+              label='Message'
+              autoFocus
+              className={classes.message}
+              value={message}
+              onChange={this.handleMessageChange}
+              variant='outlined'
+            />
+          <IconButton onClick={this.handleSettingsClick}>
+            <SettingsIcon />
+          </IconButton>
+            <Fab
+              color='primary'
+              type='submit'
+              className={classes.submit}
+            >
+              <SendIcon />
+            </Fab>
+          </Grid>
+        </form>
         <SettingsDialog open={this.state.settings_open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
-      </form>
+
+      </div>
     );
   };
 };

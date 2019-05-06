@@ -14,7 +14,7 @@ class LanguageSelect extends Component {
     const { classes } = this.props;
     return (
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='language-select'>language</InputLabel>
+        <InputLabel htmlFor='language-select'>Language</InputLabel>
         <Select
           value={this.props.value ? this.props.value : ''}
           onChange={this.props.onChange}
@@ -23,7 +23,7 @@ class LanguageSelect extends Component {
             id: 'language-select'
           }}
         >
-          {Object.keys(voices).map((language, index) =>
+          {Object.keys(voices).sort().map((language, index) =>
             <MenuItem key={index} value={language}>{language}</MenuItem>
           )}
         </Select>

@@ -5,8 +5,7 @@ import { Button,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid,
-  TextField } from '@material-ui/core';
+  Grid } from '@material-ui/core';
 import { LanguageSelect, SpeedSlider, VoiceSelect } from '../components';
 
 class SettingsDialog extends Component {
@@ -16,7 +15,7 @@ class SettingsDialog extends Component {
     this.state = { language, name, speed, voice };
   };
   handleLanguageChange = (e) => {
-    this.setState({ language: e.target.value });
+    this.setState({ language: e.target.value, voice: 0 });
   };
   handleNameChange = (e) => {
     this.setState({ name: e.target.value });
@@ -32,18 +31,19 @@ class SettingsDialog extends Component {
       language: 'English',
       name: '',
       speed: 1,
-      voice: 'Alex'
+      voice: 0
     });
   };
   handleCancel = () => {
     this.props.onSubmit();
   };
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     this.props.onSubmit(this.state);
   };
   render() {
     const { classes } = this.props;
-    const { language, name, speed, voice } = this.state;
+    const { language, speed, voice } = this.state;
     return (
       <Dialog
         open={this.props.open}
@@ -51,47 +51,48 @@ class SettingsDialog extends Component {
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
-        <DialogTitle id='settings-dialog'>Settings</DialogTitle>
-        <DialogContent>
-          <form className={classes.form}>
-            <Grid
-              container
-              direction='column'
-              justify='space-between'
-              alignItems='center'
-              spacing={16}
-            >
-              <TextField
-                id='name'
-                label='Display Name'
-                fullWidth
-                className={classes.message}
-                value={name}
-                onChange={this.handleNameChange}
-                variant='outlined'
-              />
-              <br />
-              <Grid>
-                <LanguageSelect onChange={this.handleLanguageChange} value={language} />
-                <VoiceSelect onChange={this.handleVoiceChange} value={voice} language={language} />
+        <form onSubmit={this.handleSubmit}>
+          <DialogTitle id='settings-dialog'>Settings</DialogTitle>
+          <DialogContent>
+            <div className={classes.form}>
+              <Grid
+                container
+                direction='column'
+                justify='space-between'
+                alignItems='center'
+                spacing={16}
+              >
+                {/*<TextField
+                  id='name'
+                  label='Display Name'
+                  fullWidth
+                  className={classes.message}
+                  value={name}
+                  onChange={this.handleNameChange}
+                  variant='outlined'
+                />
+                <br />*/}
+                <Grid>
+                  <LanguageSelect onChange={this.handleLanguageChange} value={language} />
+                  <VoiceSelect onChange={this.handleVoiceChange} value={voice} language={language} />
+                </Grid>
+                <br />
+                <SpeedSlider onChange={this.handleSpeedChange} value={speed} />
               </Grid>
-              <br />
-              <SpeedSlider onChange={this.handleSpeedChange} value={speed} />
-              <br />
-              <Button onClick={this.handleReset}>
-                Reset
-              </Button>
-            </Grid>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleCancel} color='secondary'>
-            Cancel
-          </Button>
-          <Button onClick={this.handleSubmit} color='primary'>
-            Apply
-          </Button>
-        </DialogActions>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleReset}>
+              Reset
+            </Button>
+            <Button onClick={this.handleCancel} style={{marginLeft: 'auto'}} color='secondary'>
+              Cancel
+            </Button>
+            <Button color='primary' type='submit'>
+              Apply
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     );
   };

@@ -57,9 +57,9 @@ class SayForm extends Component {
               onChange={this.handleMessageChange}
               variant='outlined'
             />
-          <IconButton onClick={this.handleSettingsClick}>
-            <SettingsIcon />
-          </IconButton>
+            <IconButton onClick={this.handleSettingsClick}>
+              <SettingsIcon />
+            </IconButton>
             <Fab
               color='primary'
               type='submit'
@@ -70,7 +70,6 @@ class SayForm extends Component {
           </Grid>
         </form>
         <SettingsDialog open={this.state.settings_open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
-
       </div>
     );
   };
@@ -84,7 +83,10 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   submit: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    },
   }
 });
 

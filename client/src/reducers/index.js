@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import drawer_reducer from './drawer_reducer';
+import settings_reducer from './settings_reducer';
 import theme_reducer from './theme_reducer';
 
-const rootReducer = combineReducers({
+const root_reducer = combineReducers({
   state: (state = {}) => state,
   drawer: drawer_reducer,
+  settings: settings_reducer,
   theme: theme_reducer
 });
 
-export default rootReducer;
+export default root_reducer;

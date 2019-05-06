@@ -1,4 +1,5 @@
 {
   "drawer_width": 240,
-  "limit": 100
+  "limit": 100,
+  "speed_limit": 3
 }

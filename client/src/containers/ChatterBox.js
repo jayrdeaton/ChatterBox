@@ -14,11 +14,13 @@ class ChatterBox extends Component {
     this.state = { message: '', voice: 'Alex', history: [] };
     this.sayForm = createRef();
   };
-  handleSubmit = async ({ message, voice }) => {
+  handleSubmit = async ({ message, name, speed, voice }) => {
     const { history } = this.state;
     history.push({
       id: uuid.v1(),
       message,
+      name,
+      speed,
       voice,
       timestamp: new Date()
     });
@@ -29,7 +31,7 @@ class ChatterBox extends Component {
           'Content-Type': 'application/json',
         },
         method: 'post',
-        body: JSON.stringify({ message, voice })
+        body: JSON.stringify({ message, name, speed, voice })
       });
     } catch(err) {
       console.log(err);

@@ -9,23 +9,22 @@ import {
 } from '@material-ui/core';
 import { voices } from '../refs';
 
-class VoiceSelect extends Component {
+class LanguageSelect extends Component {
   render() {
-    const { classes, language } = this.props;
-    const group = voices[language] || [];
+    const { classes } = this.props;
     return (
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='voice-select'>Voice</InputLabel>
+        <InputLabel htmlFor='language-select'>language</InputLabel>
         <Select
           value={this.props.value ? this.props.value : ''}
           onChange={this.props.onChange}
           inputProps={{
-            name: 'voice',
-            id: 'voice-select'
+            name: 'language',
+            id: 'language-select'
           }}
         >
-          {group.map((voice, index) =>
-            <MenuItem key={index} value={voice}>{voice}</MenuItem>
+          {Object.keys(voices).map((language, index) =>
+            <MenuItem key={index} value={language}>{language}</MenuItem>
           )}
         </Select>
       </FormControl>
@@ -37,10 +36,10 @@ const styles = theme => ({
     minWidth: 120,
   }
 });
-VoiceSelect.propTypes = {
+LanguageSelect.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string
 };
-VoiceSelect = withStyles(styles)(VoiceSelect);
-export default VoiceSelect;
+LanguageSelect = withStyles(styles)(LanguageSelect);
+export default LanguageSelect;

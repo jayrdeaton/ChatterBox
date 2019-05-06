@@ -1,5 +1,5 @@
 {
-  "english" : [
+  "English" : [
     "Alex",
     "Daniel",
     "Fred",
@@ -9,5 +9,8 @@
     "Tessa",
     "Veena",
     "Victoria"
+  ],
+  "Spanish" : [
+    
   ]
 }

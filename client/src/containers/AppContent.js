@@ -18,7 +18,8 @@ class AppContent extends Component {
 };
 const styles = theme => ({
   content: {
-    flexGrow: 1,
+    height: '100%',
+    width: '100%',
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

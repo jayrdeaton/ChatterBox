@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Fab, Grid, IconButton, TextField } from '@material-ui/core';
+import { Fab, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
-  Settings as SettingsIcon,
   Send as SendIcon
  } from '@material-ui/icons';
 import { SettingsDialog } from '../components';
 
 import { settings_actions } from '../actions';
-const { closeSettings, openSettings } = settings_actions;
+const { closeSettings } = settings_actions;
 
 class SayForm extends Component {
   state = { language: 'English', message: '', name: '', speed: 1, voice: 0 };
@@ -23,9 +22,6 @@ class SayForm extends Component {
   };
   handleVoiceChange = (e) => {
     this.setState({ voice: e.target.value })
-  };
-  handleSettingsClick = () => {
-    this.props.openSettings();
   };
   handleSettingsSubmit = (settings) => {
     if (!settings) return this.setState({ settings_open: false });
@@ -61,9 +57,6 @@ class SayForm extends Component {
               onChange={this.handleMessageChange}
               variant='outlined'
             />
-            <IconButton onClick={this.handleSettingsClick}>
-              <SettingsIcon />
-            </IconButton>
             <Fab
               color='primary'
               type='submit'
@@ -100,7 +93,7 @@ SayForm.propTypes = {
 
 const mapStateToProps = ({ settings }) => { return { settings } };
 
-SayForm = connect(mapStateToProps, { closeSettings, openSettings })(SayForm);
+SayForm = connect(mapStateToProps, { closeSettings })(SayForm);
 SayForm = withStyles(styles)(SayForm);
 
 export default SayForm;

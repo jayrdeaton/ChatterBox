@@ -4,10 +4,12 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import ThemeTypeButton from './ThemeTypeButton'
 import { config } from '../refs';
-import { drawer_actions } from '../actions';
 
+import SettingsButton from './SettingsButton';
+import ThemeTypeButton from './ThemeTypeButton';
+
+import { drawer_actions } from '../actions';
 const { openDrawer } = drawer_actions;
 
 class AppHeader extends Component {
@@ -30,6 +32,7 @@ class AppHeader extends Component {
             ChatterBox
           </Typography>
           <ThemeTypeButton />
+          <SettingsButton />
         </Toolbar>
       </AppBar>
     );

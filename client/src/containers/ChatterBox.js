@@ -4,8 +4,9 @@ import { IconButton, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseButton, Redo as RedoIcon } from '@material-ui/icons';
 import uuid from 'uuid';
-import { SayForm } from '../components';
 import { voices } from '../refs';
+
+import SayForm from './SayForm';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 

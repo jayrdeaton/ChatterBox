@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fab, Grid, IconButton, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,11 +7,13 @@ import {
   Settings as SettingsIcon,
   Send as SendIcon
  } from '@material-ui/icons';
+import { SettingsDialog } from '../components';
 
-import SettingsDialog from './SettingsDialog';
+import { settings_actions } from '../actions';
+const { closeSettings, openSettings } = settings_actions;
 
 class SayForm extends Component {
-  state = { language: 'English', message: '', name: '', settings_open: false, speed: 1, voice: 0 };
+  state = { language: 'English', message: '', name: '', speed: 1, voice: 0 };
   componentWillReceiveProps(props) {
     const { message, voice } = props;
     if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
@@ -22,12 +25,13 @@ class SayForm extends Component {
     this.setState({ voice: e.target.value })
   };
   handleSettingsClick = () => {
-    this.setState({ settings_open: true });
+    this.props.openSettings();
   };
   handleSettingsSubmit = (settings) => {
     if (!settings) return this.setState({ settings_open: false });
     const { language, name, speed, voice } = settings;
-    this.setState({ language, name, settings_open: false, speed, voice });
+    this.setState({ language, name, speed, voice });
+    this.props.closeSettings();
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +73,7 @@ class SayForm extends Component {
             </Fab>
           </Grid>
         </form>
-        <SettingsDialog open={this.state.settings_open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
+        <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
       </div>
     );
   };
@@ -94,6 +98,9 @@ SayForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+const mapStateToProps = ({ settings }) => { return { settings } };
+
+SayForm = connect(mapStateToProps, { closeSettings, openSettings })(SayForm);
 SayForm = withStyles(styles)(SayForm);
 
 export default SayForm;

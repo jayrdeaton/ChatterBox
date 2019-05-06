@@ -1,24 +1,35 @@
 import React, { Component, createRef } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { IconButton, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseButton, Redo as RedoIcon } from '@material-ui/icons';
 import uuid from 'uuid';
 import { voices } from '../refs';
+import { MessageForm, SettingsDialog } from '../components';
 
-import SayForm from './SayForm';
+import { settings_actions } from '../actions';
+const { closeSettings } = settings_actions;
 
 const DOMAIN = process.env.REACT_APP_DOMAIN || '';
 
 class ChatterBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {  history: [], language: 'English', message: '', voice: 0 };
-    this.sayForm = createRef();
+    this.MessageForm = createRef();
   };
-  handleSubmit = async ({ language, message, name, speed, voice }) => {
+  state = {  history: [], language: 'English', message: '', name: '', speed: 1, voice: 0 };
+  handleSettingsSubmit = (settings) => {
+    if (settings) {
+      const { language, name, speed, voice } = settings;
+      this.setState({ language, name, speed, voice });
+    };
+    this.props.closeSettings();
+  };
+  handleSubmit = async (message) => {
     if (!message) return;
-    const { history } = this.state;
+    const { history, language, name, speed } = this.state;
+    let { voice } = this.state;
     history.push({
       id: uuid.v1(),
       message,
@@ -50,17 +61,17 @@ class ChatterBox extends Component {
     this.setState({ history });
   };
   handleRedo = ({ message, voice }) => {
-    this.sayForm.current.scrollIntoView({ behavior: 'smooth' })
-    this.handleSubmit({ message, voice });
+    this.MessageForm.current.scrollIntoView({ behavior: 'smooth' })
+    this.handleMessageSubmit({ message, voice });
   };
-
   render() {
     const { classes } = this.props;
-    const { history, language, message, voice } = this.state;
+    const { history, language, message, name, speed, voice } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.formWrapper} ref={this.sayForm}>
-          <SayForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+        <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
+        <div className={classes.formWrapper} ref={this.MessageForm}>
+          <MessageForm message={message} voice={voice} onSubmit={this.handleSubmit} />
         </div>
         <div className={classes.history}>
           <div className={classes.appBarSpacer} />
@@ -129,5 +140,8 @@ ChatterBox.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+const mapStateToProps = ({ settings }) => { return { settings } };
+
+ChatterBox = connect(mapStateToProps, { closeSettings })(ChatterBox);
 ChatterBox = withStyles(styles)(ChatterBox);
 export default ChatterBox;

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fab, Grid, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
   Send as SendIcon
  } from '@material-ui/icons';
-import { SettingsDialog } from '../components';
 
-import { settings_actions } from '../actions';
-const { closeSettings } = settings_actions;
-
-class SayForm extends Component {
-  state = { language: 'English', message: '', name: '', speed: 1, voice: 0 };
+class MessageForm extends Component {
+  state = { message: '' };
   componentWillReceiveProps(props) {
     const { message, voice } = props;
     if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
@@ -20,24 +15,15 @@ class SayForm extends Component {
   handleMessageChange = (e) => {
     this.setState({ message: e.target.value });
   };
-  handleVoiceChange = (e) => {
-    this.setState({ voice: e.target.value })
-  };
-  handleSettingsSubmit = (settings) => {
-    if (!settings) return this.setState({ settings_open: false });
-    const { language, name, speed, voice } = settings;
-    this.setState({ language, name, speed, voice });
-    this.props.closeSettings();
-  };
   handleSubmit = (e) => {
     e.preventDefault();
-    const { language, message, name, speed, voice } = this.state;
+    const { message } = this.state;
     document.getElementById('message').select();
-    this.props.onSubmit({ language, message, name, speed, voice });
+    this.props.onSubmit(message);
   };
   render() {
     const { classes } = this.props;
-    const { language, message, name, speed, voice } = this.state;
+    const { message } = this.state;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -66,7 +52,6 @@ class SayForm extends Component {
             </Fab>
           </Grid>
         </form>
-        <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
       </div>
     );
   };
@@ -87,13 +72,10 @@ const styles = theme => ({
   }
 });
 
-SayForm.propTypes = {
+MessageForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ settings }) => { return { settings } };
+MessageForm = withStyles(styles)(MessageForm);
 
-SayForm = connect(mapStateToProps, { closeSettings })(SayForm);
-SayForm = withStyles(styles)(SayForm);
-
-export default SayForm;
+export default MessageForm;

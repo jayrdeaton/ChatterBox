@@ -1,5 +1,6 @@
 import ErrorDialog from './ErrorDialog';
 import LanguageSelect from './LanguageSelect';
+import MessageForm from './MessageForm';
 import SearchInput from './SearchInput';
 import SettingsDialog from './SettingsDialog';
 import SortSelect from './SortSelect';
@@ -9,6 +10,7 @@ import VoiceSelect from './VoiceSelect';
 export {
   ErrorDialog,
   LanguageSelect,
+  MessageForm,
   SearchInput,
   SettingsDialog,
   SortSelect,

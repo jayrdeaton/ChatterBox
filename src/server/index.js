@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../');
+const app = require('../app');
 const debug = require('debug')('chatterbox-test:server');
 const http = require('http');
 const cosmetic = require('cosmetic');
@@ -80,3 +80,6 @@ function onListening() {
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   console.log(`${cosmetic.cyan('ChatterBox')} is listening on ${bind}`);
 };
+
+
+module.exports = server;

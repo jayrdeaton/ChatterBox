@@ -1,9 +1,5 @@
-const controllers = require('./controllers'),
-  middlewares = require('./middlewares'),
-  routers = require('./routers');
+const app = require('./app'),
+  server = require('./server'),
+  websockets = require('./websockets');
 
-module.exports = {
-  controllers,
-  middlewares,
-  routers
-};
+module.exports = server;

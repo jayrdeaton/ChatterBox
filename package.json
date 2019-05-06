@@ -4,14 +4,14 @@
   "description": "make your device a chatterbox",
   "main": "index.js",
   "scripts": {
-    "start": "node ./bin/prod",
-    "dev": "DEBUG=chatterbox-test:* nodemon ./bin/dev",
+    "start": "node",
+    "dev": "PORT=3000 DEBUG=chatterbox-test:* nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "postinstall": "cd client && npm install && npm run build"
   },
   "bin": {
-    "chatterbox": "./bin/prod"
+    "chatterbox": "./index"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

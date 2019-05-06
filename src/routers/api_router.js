@@ -6,7 +6,7 @@ const express = require('express'),
 
   router.all('*', accessControl);
   router.all('*', bodyParser.json());
-  
+
   router.use('/say', say_controller);
 
   // catch api requests

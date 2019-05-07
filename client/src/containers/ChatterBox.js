@@ -1,24 +1,58 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { IconButton, Paper, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Close as CloseButton, Redo as RedoIcon } from '@material-ui/icons';
 import uuid from 'uuid';
 import { voices } from '../refs';
-import { MessageForm, SettingsDialog } from '../components';
+import { ChatterHistory, MessageForm, SettingsDialog } from '../components';
 
 import { settings_actions } from '../actions';
 const { closeSettings } = settings_actions;
 
-const DOMAIN = process.env.REACT_APP_DOMAIN || '';
+const WS_DOMAIN = `ws://${process.env.REACT_APP_DOMAIN}` || '';
 
 class ChatterBox extends Component {
   constructor(props) {
     super(props);
+
+    const client = this.getClientId();
+    this.state = {  client, history: [], language: 'English', message: '', name: '', speed: 1, voice: 0, websocket: null };
+
     this.MessageForm = createRef();
   };
-  state = {  history: [], language: 'English', message: '', name: '', speed: 1, voice: 0 };
+  componentWillMount() {
+    this.setupWebsocket();
+  };
+  getClientId() {
+    let client_id = sessionStorage.getItem('chatterbox_client_id');
+    if (!client_id) {
+      client_id = uuid.v1();
+      sessionStorage.setItem('chatterbox_client_id', client_id);
+    };
+    return client_id;
+  };
+  setupWebsocket = () => {
+    const websocket = new WebSocket(`${WS_DOMAIN}/websocket/message`);
+    // websocket.onopen = () => {
+    //   console.log('websocket open');
+    // };
+    websocket.onmessage = (data) => {
+      try {
+        const chatter = JSON.parse(data.data);
+        chatter.timestamp = new Date(chatter.timestamp);
+        chatter.voice = voices[chatter.language].indexOf(chatter.voice);
+        this.updateHistory(chatter);
+      } catch(err) {
+        console.log(err);
+      };
+    };
+    this.setState({ websocket });
+  };
+  updateHistory = (data) => {
+    const { history } = this.state;
+    history.push(data);
+    this.setState({ history });
+  };
   handleSettingsSubmit = (settings) => {
     if (settings) {
       const { language, name, speed, voice } = settings;
@@ -28,75 +62,39 @@ class ChatterBox extends Component {
   };
   handleSubmit = async (message) => {
     if (!message) return;
-    const { history, language, name, speed } = this.state;
+    const { client, language, name, speed, websocket  } = this.state;
     let { voice } = this.state;
-    history.push({
+    voice = voices[language][voice];
+    const object = {
+      client,
       id: uuid.v1(),
+      language,
       message,
       name,
       speed,
       voice,
       timestamp: new Date()
-    });
-    this.setState({ language, message, voice, history });
-    voice = voices[language][voice];
+    };
     try {
-      await fetch(`${DOMAIN}/api/say`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'post',
-        body: JSON.stringify({ message, name, speed, voice })
-      });
+      await websocket.send(JSON.stringify(object));
     } catch(err) {
       console.log(err);
     };
   };
-  handleDelete = ({ id }) => {
-    const { history } = this.state;
-    for (const [index, said] of history.entries()) if (said.id === id) {
-      history.splice(index, 1);
-      break;
-    };
-    this.setState({ history });
-  };
   handleRedo = ({ message, voice }) => {
-    this.MessageForm.current.scrollIntoView({ behavior: 'smooth' })
+    this.MessageForm.current.scrollIntoView({ behavior: 'smooth' });
     this.handleMessageSubmit({ message, voice });
   };
   render() {
     const { classes } = this.props;
-    const { history, language, message, name, speed, voice } = this.state;
+    const { client, history, language, message, name, speed, voice } = this.state;
     return (
       <div className={classes.root}>
         <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
         <div className={classes.formWrapper} ref={this.MessageForm}>
           <MessageForm message={message} voice={voice} onSubmit={this.handleSubmit} />
         </div>
-        <div className={classes.history}>
-          <div className={classes.appBarSpacer} />
-          {history.map((said, index) =>
-            <Paper key={index} className={classes.said}>
-              <div className={classes.row}>
-                <Typography color='textSecondary' variant='caption'>
-                  {voices[language][said.voice]} Said:
-                </Typography>
-                <Typography color='textSecondary' variant='caption' className={classes.timestamp}>
-                  {said.timestamp.toLocaleString()}
-                </Typography>
-                <IconButton aria-label='redo' color='primary' fontSize='small' className={classes.button} onClick={() => this.handleRedo(said)}>
-                  <RedoIcon />
-                </IconButton>
-                <IconButton aria-label='redo' color='secondary' fontSize='small' className={classes.button} onClick={() => this.handleDelete(said)}>
-                  <CloseButton />
-                </IconButton>
-              </div>
-              <Typography variant='subtitle1' component='p'>
-                {said.message}
-              </Typography>
-            </Paper>
-          )}
-        </div>
+        <ChatterHistory client={client} history={history} />
       </div>
     );
   };

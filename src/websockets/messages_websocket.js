@@ -6,14 +6,18 @@ const WebSocket = require('ws'),
 
 const wss = new WebSocket.Server({ server, path: '/websocket/message' });
 
+wss.broadcast = (data) => {
+  for (const client of wss.clients) if (client.readyState === WebSocket.OPEN) client.send(data);
+};
 wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     try {
       const { message, voice, speed } = JSON.parse(data);
+      if (!message) return;
       say.stop();
       say.speak(message, voice, speed);
       console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(voice)} said: ${message}`);
-      ws.send(data);
+      wss.broadcast(data);
     } catch(err) {
       console.log(`${cosmetic.red(err.name)} | ${err.message}`);
     };

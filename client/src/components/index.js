@@ -1,3 +1,4 @@
+import ChatterHistory from './ChatterHistory';
 import ErrorDialog from './ErrorDialog';
 import LanguageSelect from './LanguageSelect';
 import MessageForm from './MessageForm';
@@ -8,6 +9,7 @@ import SpeedSlider from './SpeedSlider';
 import VoiceSelect from './VoiceSelect';
 
 export {
+  ChatterHistory,
   ErrorDialog,
   LanguageSelect,
   MessageForm,

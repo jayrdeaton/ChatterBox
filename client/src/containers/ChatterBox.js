@@ -9,7 +9,7 @@ import { ChatterHistory, MessageForm, SettingsDialog } from '../components';
 import { settings_actions } from '../actions';
 const { closeSettings } = settings_actions;
 
-const WS_DOMAIN = `ws://${process.env.REACT_APP_DOMAIN}` || '';
+const WS_DOMAIN = process.env.REACT_APP_DOMAIN ? `ws://${process.env.REACT_APP_DOMAIN}` : `ws://${window.location.host}`;
 
 class ChatterBox extends Component {
   constructor(props) {

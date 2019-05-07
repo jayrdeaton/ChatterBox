@@ -15,21 +15,31 @@ class ChatterBox extends Component {
   constructor(props) {
     super(props);
 
-    const client = this.getClientId();
-    this.state = {  client, history: [], language: 'English', message: '', name: '', speed: 1, voice: 0, websocket: null };
+    const { client, language, speed, voice } = this.getDefaults();
+    this.state = {  client, history: [], language, message: '', name: '', speed, voice, websocket: null };
 
     this.MessageForm = createRef();
   };
   componentWillMount() {
     this.setupWebsocket();
   };
-  getClientId() {
-    let client_id = sessionStorage.getItem('chatterbox_client_id');
-    if (!client_id) {
-      client_id = uuid.v1();
-      sessionStorage.setItem('chatterbox_client_id', client_id);
+  getDefaults = () => {
+    let client = sessionStorage.getItem('chatterbox_client_id');
+    if (!client) {
+      client = uuid.v1();
+      sessionStorage.setItem('chatterbox_client_id', client);
     };
-    return client_id;
+    const language = sessionStorage.getItem('chatterbox_language') || 'English';
+    let speed = sessionStorage.getItem('chatterbox_speed') || 1;
+    speed = parseFloat(speed);
+    let voice = sessionStorage.getItem('chatterbox_voice') || Math.round(Math.random() * voices[language].length);
+    voice = parseFloat(voice);
+    return { client, language, speed, voice };
+  };
+  setDefaults = ({ language, speed, voice }) => {
+    sessionStorage.setItem('chatterbox_language', language);
+    sessionStorage.setItem('chatterbox_speed', speed);
+    sessionStorage.setItem('chatterbox_voice', voice);
   };
   setupWebsocket = () => {
     const websocket = new WebSocket(`${WS_DOMAIN}/websocket/message`);
@@ -65,6 +75,7 @@ class ChatterBox extends Component {
   };
   handleSettingsSubmit = (settings) => {
     if (settings) {
+      this.setDefaults(settings);
       const { language, name, speed, voice } = settings;
       this.setState({ language, name, speed, voice });
     };

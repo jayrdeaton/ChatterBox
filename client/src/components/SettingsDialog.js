@@ -47,7 +47,7 @@ class SettingsDialog extends Component {
     return (
       <Dialog
         open={this.props.open}
-        onClose={this.props.onSubmit}
+        onClose={this.handleCancel}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >

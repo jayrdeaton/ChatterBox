@@ -8,10 +8,6 @@ import {
 
 class MessageForm extends Component {
   state = { message: '' };
-  componentWillReceiveProps(props) {
-    const { message, voice } = props;
-    if (message !== this.state.message || voice !== this.state.voice) this.setState({ message, voice });
-  };
   handleMessageChange = (e) => {
     this.setState({ message: e.target.value });
   };

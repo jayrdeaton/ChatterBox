@@ -3,19 +3,22 @@ const WebSocket = require('ws'),
   say = require('say'),
   cosmetic = require('cosmetic');
 
-
+const history = [];
 const wss = new WebSocket.Server({ server, path: '/websocket/message' });
 
 wss.broadcast = (data) => {
   for (const client of wss.clients) if (client.readyState === WebSocket.OPEN) client.send(data);
 };
 wss.on('connection', (ws) => {
+  ws.send(JSON.stringify(history));
   ws.on('message', (data) => {
     try {
-      const { message, voice, speed } = JSON.parse(data);
+      const chatter = JSON.parse(data);
+      const { message, voice, speed } = chatter;
       if (!message) return;
       say.stop();
       say.speak(message, voice, speed);
+      history.push(chatter);
       console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(voice)} said: ${message}`);
       wss.broadcast(data);
     } catch(err) {

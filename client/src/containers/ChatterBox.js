@@ -37,13 +37,23 @@ class ChatterBox extends Component {
     //   console.log('websocket open');
     // };
     websocket.onmessage = (data) => {
+      const { history } = this.state;
       try {
         const chatter = JSON.parse(data.data);
-        chatter.timestamp = new Date(chatter.timestamp);
-        chatter.voice = voices[chatter.language].indexOf(chatter.voice);
-        this.updateHistory(chatter);
+        if (chatter instanceof Array) {
+          for (const c of chatter) {
+            c.timestamp = new Date(c.timestamp);
+            c.voice = voices[c.language].indexOf(c.voice);
+            history.push(c);
+          };
+        } else {
+          chatter.timestamp = new Date(chatter.timestamp);
+          chatter.voice = voices[chatter.language].indexOf(chatter.voice);
+          history.push(chatter);
+        };
+        this.setState({ history });
       } catch(err) {
-        console.log(err);
+        console.error(err);
       };
     };
     this.setState({ websocket });
@@ -78,7 +88,7 @@ class ChatterBox extends Component {
     try {
       await websocket.send(JSON.stringify(object));
     } catch(err) {
-      console.log(err);
+      console.error(err);
     };
   };
   handleRedo = ({ message, voice }) => {
@@ -87,12 +97,12 @@ class ChatterBox extends Component {
   };
   render() {
     const { classes } = this.props;
-    const { client, history, language, message, name, speed, voice } = this.state;
+    const { client, history, language, name, speed, voice } = this.state;
     return (
       <div className={classes.root}>
         <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
         <div className={classes.formWrapper} ref={this.MessageForm}>
-          <MessageForm message={message} voice={voice} onSubmit={this.handleSubmit} />
+          <MessageForm voice={voice} onSubmit={this.handleSubmit} />
         </div>
         <ChatterHistory client={client} history={history} />
       </div>

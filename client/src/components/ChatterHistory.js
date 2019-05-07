@@ -16,7 +16,7 @@ let ChatterHistory = ({ classes, client, history, theme }) => {
               <div className={classes.chatter}>
                 <Grid container direction='row'>
                   <Typography style={{marginLeft: 'auto'}} color='textSecondary' variant='caption'>
-                    {voices[chatter.language][chatter.voice]}
+                    {chatter.name ? chatter.name : voices[chatter.language][chatter.voice]}
                   </Typography>
                 </Grid>
                 <Paper style={{color: 'white', backgroundColor: theme.palette.primary.main}} className={classes.paper}>

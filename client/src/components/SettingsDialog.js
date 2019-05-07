@@ -5,7 +5,8 @@ import { Button,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Grid } from '@material-ui/core';
+  Grid,
+  TextField } from '@material-ui/core';
 import { LanguageSelect, SpeedSlider, VoiceSelect } from '../components';
 
 class SettingsDialog extends Component {
@@ -43,7 +44,7 @@ class SettingsDialog extends Component {
   };
   render() {
     const { classes } = this.props;
-    const { language, speed, voice } = this.state;
+    const { language, name, speed, voice } = this.state;
     return (
       <Dialog
         open={this.props.open}
@@ -62,7 +63,7 @@ class SettingsDialog extends Component {
                 alignItems='center'
                 spacing={16}
               >
-                {/*<TextField
+                <TextField
                   id='name'
                   label='Display Name'
                   fullWidth
@@ -71,7 +72,7 @@ class SettingsDialog extends Component {
                   onChange={this.handleNameChange}
                   variant='outlined'
                 />
-                <br />*/}
+                <br />
                 <Grid>
                   <LanguageSelect onChange={this.handleLanguageChange} value={language} />
                   <VoiceSelect onChange={this.handleVoiceChange} value={voice} language={language} />

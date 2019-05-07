@@ -14,12 +14,12 @@ wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     try {
       const chatter = JSON.parse(data);
-      const { message, voice, speed } = chatter;
+      const { message, name, voice, speed } = chatter;
       if (!message) return;
       say.stop();
       say.speak(message, voice, speed);
       history.push(chatter);
-      console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(voice)} said: ${message}`);
+      console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(name ? name : voice)} said: ${message}`);
       wss.broadcast(data);
     } catch(err) {
       console.log(`${cosmetic.red(err.name)} | ${err.message}`);

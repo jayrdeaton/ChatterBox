@@ -34,6 +34,7 @@ class MessageForm extends Component {
               id='message'
               label='Message'
               autoFocus
+              autoComplete={null}
               className={classes.message}
               value={message}
               onChange={this.handleMessageChange}

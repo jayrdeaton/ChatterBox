@@ -15,8 +15,8 @@ class ChatterBox extends Component {
   constructor(props) {
     super(props);
 
-    const { client, language, speed, voice } = this.getDefaults();
-    this.state = {  client, history: [], language, message: '', name: '', speed, voice, websocket: null };
+    const { client, language, name, speed, voice } = this.getDefaults();
+    this.state = {  client, history: [], language, message: '', name, speed, voice, websocket: null };
 
     this.MessageForm = createRef();
   };
@@ -30,14 +30,16 @@ class ChatterBox extends Component {
       sessionStorage.setItem('chatterbox_client_id', client);
     };
     const language = sessionStorage.getItem('chatterbox_language') || 'English';
+    const name = sessionStorage.getItem('chatterbox_name') || '';
     let speed = sessionStorage.getItem('chatterbox_speed') || 1;
     speed = parseFloat(speed);
     let voice = sessionStorage.getItem('chatterbox_voice') || Math.round(Math.random() * voices[language].length);
     voice = parseFloat(voice);
-    return { client, language, speed, voice };
+    return { client, language, name, speed, voice };
   };
-  setDefaults = ({ language, speed, voice }) => {
+  setDefaults = ({ language, name, speed, voice }) => {
     sessionStorage.setItem('chatterbox_language', language);
+    sessionStorage.setItem('chatterbox_name', name);
     sessionStorage.setItem('chatterbox_speed', speed);
     sessionStorage.setItem('chatterbox_voice', voice);
   };

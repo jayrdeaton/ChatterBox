@@ -9,19 +9,19 @@ const createError = require('http-errors'),
   port = process.env.PORT || 80;
 
 // view engine setup
-app.set('views', join(__dirname, 'src', 'views'));
+app.set('views', join(__dirname, '..', 'views'));
 app.set('view engine', 'ejs');
 // other plugins
 app.use(morgan('dev'));
 app.use(cors());
 // serve react build
-app.use(express.static(join(__dirname, 'client', 'build')));
+app.use(express.static(join(__dirname, '..', '..', 'client', 'build')));
 // routers
 app.use('/api', api_router);
 
 // catchAll / send file
 app.use('*', (req, res) => {
-  res.sendFile(join(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(join(__dirname, '..', '..', 'client', 'build', 'index.html'));
 });
 // error handler
 app.use((err, req, res, next) => {

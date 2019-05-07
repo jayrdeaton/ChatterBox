@@ -5,8 +5,7 @@ const createError = require('http-errors'),
   { join } = require('path'),
   routers = require('../routers'),
   { api_router } = routers,
-  app = express(),
-  port = process.env.PORT || 80;
+  app = express();
 
 // view engine setup
 app.set('views', join(__dirname, '..', 'views'));

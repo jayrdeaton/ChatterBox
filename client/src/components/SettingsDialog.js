@@ -51,6 +51,7 @@ class SettingsDialog extends Component {
         onClose={this.handleCancel}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
+        scroll={'body'}
       >
         <form onSubmit={this.handleSubmit}>
           <DialogTitle id='settings-dialog'>Settings</DialogTitle>

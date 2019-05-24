@@ -8,11 +8,15 @@ import {
 
 class MessageForm extends Component {
   state = { message: '' };
+  handleKeyPress = (e) => {
+    const { altKey, ctrlKey, shiftKey, charCode } = e;
+    if (!altKey && !ctrlKey && !shiftKey && charCode === 13) this.handleSubmit(e);
+  };
   handleMessageChange = (e) => {
     this.setState({ message: e.target.value });
   };
   handleSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const { message } = this.state;
     document.getElementById('message').select();
     this.props.onSubmit(message);
@@ -34,6 +38,9 @@ class MessageForm extends Component {
               id='message'
               label='Message'
               autoFocus
+              multiline
+              rowsMax={4}
+              onKeyPress={this.handleKeyPress}
               autoComplete={null}
               className={classes.message}
               value={message}
@@ -44,6 +51,7 @@ class MessageForm extends Component {
               color='primary'
               type='submit'
               className={classes.submit}
+              size='small'
             >
               <SendIcon />
             </Fab>
@@ -56,15 +64,17 @@ class MessageForm extends Component {
 const styles = theme => ({
   message: {
     flexGrow: 1,
-    margin: theme.spacing.unit
+    marginRight: theme.spacing.unit
+    // margin: 0
   },
   voice: {
     margin: theme.spacing.unit
   },
   submit: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
     [theme.breakpoints.down('xs')]: {
-      display: 'none'
+      // height: 15,
+      // width: 15
     },
   }
 });

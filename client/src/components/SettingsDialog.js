@@ -74,7 +74,7 @@ class SettingsDialog extends Component {
                   variant='outlined'
                 />
                 <br />
-                <Grid>
+                <Grid container justify='space-evenly'>
                   <LanguageSelect onChange={this.handleLanguageChange} value={language} />
                   <VoiceSelect onChange={this.handleVoiceChange} value={voice} language={language} />
                 </Grid>

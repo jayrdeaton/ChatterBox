@@ -44,7 +44,7 @@ class ChatterBox extends Component {
     sessionStorage.setItem('chatterbox_voice', voice);
   };
   setupWebsocket = () => {
-    const websocket = new WebSocket(`${WS_DOMAIN}/websocket/message`);
+    const websocket = new WebSocket(`${WS_DOMAIN}/websocket`);
     // websocket.onopen = () => {
     //   console.log('websocket open');
     // };

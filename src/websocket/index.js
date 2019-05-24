@@ -4,7 +4,7 @@ const WebSocket = require('ws'),
   cosmetic = require('cosmetic');
 
 const history = [];
-const wss = new WebSocket.Server({ server, path: '/websocket/message' });
+const wss = new WebSocket.Server({ server, path: '/websocket' });
 
 wss.broadcast = (data) => {
   for (const client of wss.clients) if (client.readyState === WebSocket.OPEN) client.send(data);

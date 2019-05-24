@@ -35,7 +35,7 @@ let ChatterHistory = ({ classes, client, history, theme }) => {
                   </Typography>
                 </Grid>
                 <Paper className={classes.paper}>
-                  <Typography color='inherit' variant='subtitle1' component='p'>
+                  <Typography color='textPrimary' variant='subtitle1' component='p'>
                     {chatter.message}
                   </Typography>
                 </Paper>

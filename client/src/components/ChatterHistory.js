@@ -20,7 +20,7 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
                   </Typography>
                 </Grid>
                 <Paper style={{color: 'white', backgroundColor: theme.palette.primary.main, padding: 0}} className={classes.paper}>
-                  <ButtonBase className={classes.button} onClick={() => onClick(chatter.message)}>
+                  <ButtonBase className={classes.button} onClick={() => onClick(chatter)}>
                     <Typography color='inherit' variant='subtitle1' component='p'>
                       {chatter.message}
                     </Typography>
@@ -37,7 +37,7 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
                   </Typography>
                 </Grid>
                 <Paper className={classes.paper}>
-                  <ButtonBase onClick={() => onClick(chatter.message)} style={{width: '100%', height: '100%', padding: theme.spacing.unit, justifyContent: 'flex-start'}}>
+                  <ButtonBase onClick={() => onClick(chatter)} style={{width: '100%', height: '100%', padding: theme.spacing.unit, justifyContent: 'flex-start'}}>
                     <Typography color='textPrimary' variant='subtitle1' component='p'>
                       {chatter.message}
                     </Typography>

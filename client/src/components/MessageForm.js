@@ -19,7 +19,7 @@ class MessageForm extends Component {
     if (e) e.preventDefault();
     const message = this.state.message || this.state.last_message;
     this.setState({ last_message: message, message: '' });
-    this.props.onSubmit(message);
+    this.props.onSubmit({ message });
   };
   render() {
     const { classes } = this.props;

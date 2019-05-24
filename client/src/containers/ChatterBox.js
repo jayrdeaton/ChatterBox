@@ -83,8 +83,8 @@ class ChatterBox extends Component {
     };
     this.props.closeSettings();
   };
-  handleSubmit = async (message) => {
-    if (!message) return;
+  handleSubmit = async ({ message, sound }) => {
+    if (!message && isNaN(sound)) return;
     const { client, language, name, speed, websocket  } = this.state;
     let { voice } = this.state;
     voice = voices[language][voice];
@@ -96,6 +96,7 @@ class ChatterBox extends Component {
       name,
       speed,
       voice,
+      sound,
       timestamp: new Date()
     };
     try {
@@ -104,9 +105,9 @@ class ChatterBox extends Component {
       console.error(err);
     };
   };
-  handleReplay = (message) => {
+  handleReplay = ({ message, sound }) => {
     this.MessageForm.current.scrollIntoView({ behavior: 'smooth' });
-    this.handleSubmit(message);
+    this.handleSubmit({ message, sound });
   };
   render() {
     const { classes } = this.props;

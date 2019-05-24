@@ -1,7 +1,7 @@
 const express = require('express'),
   router = express.Router(),
   say = require('say'),
-  { cyan } = require('cosmetic'),
+  cosmetic = require('cosmetic'),
   { runCommand } = require('../helpers'),
   { sounds } = require('../refs');
 
@@ -13,7 +13,7 @@ router.route('/')
     if (!sound) return res.status(404).send();
     try {
       runCommand(`afplay /System/Library/Sounds/${sound}.aiff`);
-      console.log(`${new Date().toLocaleString()} | ${cyan(name || voice)} played: ${sound}`);
+      console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(name || voice)} played: ${sound}`);
       res.status(200).send();
     } catch(err) {
       res.status(500).send(err);

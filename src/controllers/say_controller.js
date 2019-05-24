@@ -1,7 +1,8 @@
 const express = require('express'),
   router = express.Router(),
   say = require('say'),
-  cosmetic = require('cosmetic');
+  cosmetic = require('cosmetic'),
+  { runCommand } = require('../helpers');
 
 router.route('/')
   .post(async (req, res, next) => {
@@ -10,6 +11,7 @@ router.route('/')
     try {
       say.stop();
       say.speak(message, voice, speed);
+      // runCommand(`say ${voice ? `-v ${voice}` : ''} ${speed ? `-r ${speed}` : ''} ${message}`)
       console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(name || voice)} said: ${message}`);
       res.status(200).send();
     } catch(err) {

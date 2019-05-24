@@ -104,9 +104,9 @@ class ChatterBox extends Component {
       console.error(err);
     };
   };
-  handleRedo = ({ message, voice }) => {
+  handleReplay = (message) => {
     this.MessageForm.current.scrollIntoView({ behavior: 'smooth' });
-    this.handleMessageSubmit({ message, voice });
+    this.handleSubmit(message);
   };
   render() {
     const { classes } = this.props;
@@ -117,7 +117,7 @@ class ChatterBox extends Component {
         <div className={classes.formWrapper} ref={this.MessageForm}>
           <MessageForm voice={voice} onSubmit={this.handleSubmit} />
         </div>
-        <ChatterHistory client={client} history={history} />
+        <ChatterHistory client={client} history={history} onClick={this.handleReplay} />
       </div>
     );
   };

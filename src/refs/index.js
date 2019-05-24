@@ -1,5 +1,7 @@
-const sounds = require('./sounds');
+const sounds = require('./sounds'),
+  voices = require('./voices');
 
 module.exports = {
-  sounds
+  sounds,
+  voices
 };

@@ -7,7 +7,7 @@ import {
  } from '@material-ui/icons';
 
 class MessageForm extends Component {
-  state = { message: '' };
+  state = { last_message: '', message: '' };
   handleKeyPress = (e) => {
     const { altKey, ctrlKey, shiftKey, charCode } = e;
     if (!altKey && !ctrlKey && !shiftKey && charCode === 13) this.handleSubmit(e);
@@ -17,8 +17,8 @@ class MessageForm extends Component {
   };
   handleSubmit = (e) => {
     if (e) e.preventDefault();
-    const { message } = this.state;
-    document.getElementById('message').select();
+    const message = this.state.message || this.state.last_message;
+    this.setState({ last_message: message, message: '' });
     this.props.onSubmit(message);
   };
   render() {

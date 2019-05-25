@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import uuid from 'uuid';
 import { voices } from '../refs';
-import { ChatterHistory, MessageForm, SettingsDialog } from '../components';
+import { ChatterHistory, MessageForm, SettingsDialog, SoundsDialog } from '../components';
 
-import { settings_actions } from '../actions';
+import { settings_actions, sounds_actions } from '../actions';
 const { closeSettings } = settings_actions;
+const { closeSounds } = sounds_actions;
 
 const WS_DOMAIN = process.env.REACT_APP_DOMAIN ? `ws://${process.env.REACT_APP_DOMAIN}` : `ws://${window.location.host}`;
 
@@ -115,6 +116,7 @@ class ChatterBox extends Component {
     return (
       <div className={classes.root}>
         <SettingsDialog open={this.props.settings.open} onSubmit={this.handleSettingsSubmit} language={language} name={name} speed={speed} voice={voice} />
+        <SoundsDialog open={this.props.sounds.open} onSubmit={this.handleSubmit} onClose={this.props.closeSounds} />
         <div className={classes.formWrapper} ref={this.MessageForm}>
           <MessageForm voice={voice} onSubmit={this.handleSubmit} />
         </div>
@@ -162,8 +164,8 @@ ChatterBox.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ settings }) => { return { settings } };
+const mapStateToProps = ({ settings, sounds }) => { return { settings, sounds } };
 
-ChatterBox = connect(mapStateToProps, { closeSettings })(ChatterBox);
+ChatterBox = connect(mapStateToProps, { closeSettings, closeSounds })(ChatterBox);
 ChatterBox = withStyles(styles)(ChatterBox);
 export default ChatterBox;

@@ -3,6 +3,8 @@ import AppContent from './AppContent';
 import AppDrawer from './AppDrawer';
 import AppHeader from './AppHeader';
 import ChatterBox from './ChatterBox';
+import SettingsButton from './SettingsButton';
+import SoundsButton from './SoundsButton';
 import ThemeTypeButton from './ThemeTypeButton';
 
 export {
@@ -11,5 +13,7 @@ export {
   AppDrawer,
   AppHeader,
   ChatterBox,
+  SettingsButton,
+  SoundsButton,
   ThemeTypeButton,
 };

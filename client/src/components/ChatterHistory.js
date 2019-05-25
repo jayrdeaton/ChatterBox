@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonBase, Grid, Paper, Typography } from '@material-ui/core';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { voices } from '../refs';
+import { sounds, voices } from '../refs';
 
 let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
   return (
@@ -21,9 +21,16 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
                 </Grid>
                 <Paper style={{color: 'white', backgroundColor: theme.palette.primary.main, padding: 0}} className={classes.paper}>
                   <ButtonBase className={classes.button} onClick={() => onClick(chatter)}>
-                    <Typography color='inherit' variant='subtitle1' component='p'>
-                      {chatter.message}
-                    </Typography>
+                    {chatter.message ?
+                      <Typography color='inherit' variant='subtitle1' component='p'>
+                        {chatter.message}
+                      </Typography>
+                    : null}
+                    {!isNaN(chatter.sound) ?
+                      <Typography style={{width: '100%'}} align='center' color='inherit' variant='subtitle1' component='p'>
+                        *{sounds[chatter.sound]}*
+                      </Typography>
+                    : null}
                   </ButtonBase>
                 </Paper>
               </div>

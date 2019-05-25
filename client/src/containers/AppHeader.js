@@ -7,6 +7,7 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { config } from '../refs';
 
 import SettingsButton from './SettingsButton';
+import SoundsButton from './SoundsButton';
 import ThemeTypeButton from './ThemeTypeButton';
 
 import { drawer_actions } from '../actions';
@@ -32,6 +33,7 @@ class AppHeader extends Component {
             ChatterBox
           </Typography>
           <ThemeTypeButton />
+          <SoundsButton />
           <SettingsButton />
         </Toolbar>
       </AppBar>
@@ -40,8 +42,8 @@ class AppHeader extends Component {
 };
 const styles = theme => ({
   toolbar: {
-    paddingLeft: 24,
-    paddingRight: 24
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
   },
   appBar: {
     position: 'absolute',

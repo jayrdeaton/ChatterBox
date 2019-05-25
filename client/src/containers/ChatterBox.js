@@ -46,9 +46,6 @@ class ChatterBox extends Component {
   };
   setupWebsocket = () => {
     const websocket = new WebSocket(`${WS_DOMAIN}/websocket`);
-    // websocket.onopen = () => {
-    //   console.log('websocket open');
-    // };
     websocket.onmessage = (data) => {
       const { history } = this.state;
       try {
@@ -68,6 +65,9 @@ class ChatterBox extends Component {
       } catch(err) {
         console.error(err);
       };
+    };
+    websocket.onclose = () => {
+      setTimeout(this.setupWebsocket, 250);
     };
     this.setState({ websocket });
   };

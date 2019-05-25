@@ -4,8 +4,7 @@ import { Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
-  Grid } from '@material-ui/core';
+  DialogTitle } from '@material-ui/core';
 import { sounds } from '../refs';
 
 class SoundsDialog extends Component {

@@ -17,8 +17,8 @@ wss.on('connection', (ws) => {
     try {
       const chatter = JSON.parse(data);
       const { message, name, voice, sound, speed } = chatter;
-      say.stop();
       if (message) {
+        say.stop();
         say.speak(message, voice, speed);
         history.push(chatter);
         console.log(`${new Date().toLocaleString()} | ${cosmetic.cyan(name ? name : voice)} said: ${message}`);

@@ -10,7 +10,7 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
       <div className={classes.appBarSpacer} />
       {history.map((chatter, index) =>
         <div key={chatter.id} className={classes.message}>
-          {chatter.client === client ?
+          {chatter.client !== client ?
             <Grid container direction='row'>
               <div className={classes.spacer} />
               <div className={classes.chatter}>
@@ -45,9 +45,16 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
                 </Grid>
                 <Paper className={classes.paper}>
                   <ButtonBase onClick={() => onClick(chatter)} style={{width: '100%', height: '100%', padding: theme.spacing.unit, justifyContent: 'flex-start'}}>
-                    <Typography color='textPrimary' variant='subtitle1' component='p'>
-                      {chatter.message}
-                    </Typography>
+                    {chatter.message ?
+                      <Typography color='textPrimary' variant='subtitle1' component='p'>
+                        {chatter.message}
+                      </Typography>
+                    : null}
+                    {!isNaN(chatter.sound) ?
+                      <Typography style={{width: '100%'}} align='center' color='inherit' variant='subtitle1' component='p'>
+                        *{sounds[chatter.sound]}*
+                      </Typography>
+                    : null}
                   </ButtonBase>
                 </Paper>
               </div>

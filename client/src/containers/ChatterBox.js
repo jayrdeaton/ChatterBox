@@ -67,7 +67,7 @@ class ChatterBox extends Component {
       };
     };
     websocket.onclose = () => {
-      setTimeout(this.setupWebsocket, 250);
+      setTimeout(this.setupWebsocket, 500);
     };
     this.setState({ websocket });
   };

@@ -10,7 +10,7 @@ let ChatterHistory = ({ classes, client, history, onClick, theme }) => {
       <div className={classes.appBarSpacer} />
       {history.map((chatter, index) =>
         <div key={chatter.id} className={classes.message}>
-          {chatter.client !== client ?
+          {chatter.client === client ?
             <Grid container direction='row'>
               <div className={classes.spacer} />
               <div className={classes.chatter}>
